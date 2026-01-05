@@ -1,0 +1,42 @@
+{% extends "base.html"%}
+
+
+{% block content %}
+<body>
+    <h1>Books</h1><br>
+    <div>
+        <table border="1">
+            <tr>
+                <th>Cover</th>
+                <th>Name</th>
+                <th>Auther</th>
+                <th>Print</th>
+                <th>Description</th>
+                <th>Option</th>
+            </tr>
+            {% for i in b%}
+            <tr>
+                {%if i.cover%}
+                <td>
+                    <img src="{{i.cover.url}}" width="100px" height="100px" alt="no">
+                </td>
+                {% else%}
+                <td>No Image</td>
+                {% endif%}
+                <td>{{i.name    }}</td>
+                <td>{{i.auther}}</td>
+                <td>{{i.price}}</td>
+                <td>{{i.description}}</td>
+                <td><a href="{% url 'updatebook' i.id %}">Update</a>
+                    <a href="{% url 'delete' i.id %}">Delete</a>
+                    <a href="{% url 'add' i.id%}">Add to Cart</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div>
+        <a href="{% url 'logout' %}">LogOut</a>
+    </div>
+</body>
+{% endblock content %}
